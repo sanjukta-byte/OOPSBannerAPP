@@ -1,34 +1,30 @@
 /**
  * OOPSBannerApp
  *
- * UC3: Refactored banner creation using String.join()
- * to improve memory efficiency and readability.
+ * UC4: Banner stored in String array and printed using loop.
+ * Improves modularity, maintainability and reusability.
  *
  * @author Sanjukta
- * @version 3.0
+ * @version 4.0
  */
 public class OOPSBannerApp {
 
     public static void main(String[] args) {
-System.out.println(String.join(" ",
-                "  ***** ", "   ***** ", " ******** ", "  ***** "));
 
-        System.out.println(String.join(" ",
-                "**     **", "**     **", "**     **", "**     **"));
+        String[] banner = {
+			
+        "  *****     *****   ********    ***** ",
+        "**     ** **     ** **     ** **     **",
+        "**     ** **     ** **     ** **      ",
+        "**     ** **     ** ********     **** ",
+        "**     ** **     ** **              ** ",
+        "**     ** **     ** **        **     **",
+        "  *****     *****   **          ***** "
+        };
 
-        System.out.println(String.join(" ",
-                "**     **", "**     **", "**     **", "**"));
-
-        System.out.println(String.join(" ",
-                "**     **", "**     **", "******** ", "   **** "));
-
-        System.out.println(String.join(" ",
-                "**     **", "**     **", "**       ", "      **"));
-
-        System.out.println(String.join(" ",
-                "**     **", "**     **", "**       ", "**     **"));
-
-        System.out.println(String.join(" ",
-                "  ***** ", "   ***** ", " **      ", "   ***** "));
+        // Enhanced for-loop
+        for (String line : banner) {
+            System.out.println(line);
+        }
     }
 }
