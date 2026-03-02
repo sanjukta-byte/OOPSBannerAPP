@@ -1,11 +1,11 @@
 /**
  * OOPSBannerApp
  *
- * UC7: Banner generated using CharacterPattern class.
- * Demonstrates encapsulation, abstraction, and scalability.
+ * UC8: Hashmap pattern refactor.
+ * Demonstrates efficiency, improved storage, and scalability.
  *
  * @author Sanjukta
- * @version 7.0
+ * @version 8.0
  */
 
 import java.util.HashMap;
@@ -15,27 +15,23 @@ public class OOPSBannerApp {
 
     // Static Inner Class for Character Pattern
     static class CharacterPattern {
-        private char character;
         private String[] pattern;
 
-        // Constructor
-        public CharacterPattern(char character, String[] pattern) {
-            this.character = character;
+        public CharacterPattern(String[] pattern) {
             this.pattern = pattern;
         }
 
-        // Getter
         public String[] getPattern() {
             return pattern;
         }
     }
 
-    public static void main(String[] args) {
+    // Method to initialize pattern map
+    private static Map<Character, CharacterPattern> initializePatterns() {
 
-        // Character pattern storage
         Map<Character, CharacterPattern> patternMap = new HashMap<>();
 
-        patternMap.put('O', new CharacterPattern('O', new String[]{
+        patternMap.put('O', new CharacterPattern(new String[]{
                 "  *****  ",
                 "**     **",
                 "**     **",
@@ -45,7 +41,7 @@ public class OOPSBannerApp {
                 "  *****  "
         }));
 
-        patternMap.put('P', new CharacterPattern('P', new String[]{
+        patternMap.put('P', new CharacterPattern(new String[]{
                 "******** ",
                 "**     **",
                 "**     **",
@@ -55,28 +51,48 @@ public class OOPSBannerApp {
                 "**       "
         }));
 
-        patternMap.put('S', new CharacterPattern('S', new String[]{
+        patternMap.put('S', new CharacterPattern(new String[]{
                 "  *****  ",
                 "**     **",
                 "**",
-                "   **** ",
+                "   ****  ",
                 "      **",
                 "**     **",
-                "  ***** "
+                "  *****  "
         }));
 
-        String word = "OOPS";
-        String[] banner = new String[7];
+        return patternMap;
+    }
 
-        for (int i = 0; i < 7; i++) {
+    // Method to build banner
+    private static String[] buildBanner(String word, Map<Character, CharacterPattern> patternMap) {
+
+        int height = 7;
+        String[] banner = new String[height];
+
+        for (int i = 0; i < height; i++) {
             StringBuilder lineBuilder = new StringBuilder();
 
             for (char ch : word.toCharArray()) {
-                lineBuilder.append(patternMap.get(ch).getPattern()[i]).append(" ");
+                CharacterPattern pattern = patternMap.get(ch);
+                if (pattern != null) {
+                    lineBuilder.append(pattern.getPattern()[i]).append(" ");
+                }
             }
 
             banner[i] = lineBuilder.toString();
         }
+
+        return banner;
+    }
+
+    public static void main(String[] args) {
+
+        Map<Character, CharacterPattern> patternMap = initializePatterns();
+
+        String word = "OOPS";
+
+        String[] banner = buildBanner(word, patternMap);
 
         // Render banner
         for (String line : banner) {
