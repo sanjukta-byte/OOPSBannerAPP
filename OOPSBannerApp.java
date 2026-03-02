@@ -1,40 +1,41 @@
 /**
  * OOPSBannerApp
  *
- * UC6: Banner generated using static helper methods.
- * Applies modular programming and DRY principle.
+ * UC7: Banner generated using CharacterPattern class.
+ * Demonstrates encapsulation, abstraction, and scalability.
  *
  * @author Sanjukta
- * @version 6.0
+ * @version 7.0
  */
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class OOPSBannerApp {
 
-    public static void main(String[] args) {
+    // Static Inner Class for Character Pattern
+    static class CharacterPattern {
+        private char character;
+        private String[] pattern;
 
-        String[] o1 = buildO();
-        String[] o2 = buildO();
-        String[] p  = buildP();
-        String[] s  = buildS();
-
-        String[] banner = new String[7];
-
-        for (int i = 0; i < 7; i++) {
-            banner[i] = String.join(" ",
-                    o1[i],
-                    o2[i],
-                    p[i],
-                    s[i]
-            );
+        // Constructor
+        public CharacterPattern(char character, String[] pattern) {
+            this.character = character;
+            this.pattern = pattern;
         }
 
-        for (String line : banner) {
-            System.out.println(line);
+        // Getter
+        public String[] getPattern() {
+            return pattern;
         }
     }
 
-    // Letter O
-    public static String[] buildO() {
-        return new String[]{
+    public static void main(String[] args) {
+
+        // Character pattern storage
+        Map<Character, CharacterPattern> patternMap = new HashMap<>();
+
+        patternMap.put('O', new CharacterPattern('O', new String[]{
                 "  *****  ",
                 "**     **",
                 "**     **",
@@ -42,32 +43,44 @@ public class OOPSBannerApp {
                 "**     **",
                 "**     **",
                 "  *****  "
-        };
-    }
+        }));
 
-    // Letter P
-    public static String[] buildP() {
-        return new String[]{
+        patternMap.put('P', new CharacterPattern('P', new String[]{
                 "******** ",
                 "**     **",
                 "**     **",
                 "******** ",
                 "**       ",
                 "**       ",
-                "**      "
-        };
-    }
+                "**       "
+        }));
 
-    // Letter S
-    public static String[] buildS() {
-        return new String[]{
-                "  ***** ",
+        patternMap.put('S', new CharacterPattern('S', new String[]{
+                "  *****  ",
                 "**     **",
                 "**",
                 "   **** ",
                 "      **",
                 "**     **",
-                "   ***** "
-        };
+                "  ***** "
+        }));
+
+        String word = "OOPS";
+        String[] banner = new String[7];
+
+        for (int i = 0; i < 7; i++) {
+            StringBuilder lineBuilder = new StringBuilder();
+
+            for (char ch : word.toCharArray()) {
+                lineBuilder.append(patternMap.get(ch).getPattern()[i]).append(" ");
+            }
+
+            banner[i] = lineBuilder.toString();
+        }
+
+        // Render banner
+        for (String line : banner) {
+            System.out.println(line);
+        }
     }
 }
