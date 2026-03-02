@@ -1,8 +1,29 @@
-
+/**
+ * OOPSBannerApp
+ *
+ * UC5: Banner constructed using String.join()
+ * Improves structure and reduces rigid hardcoding.
+ *
+ * @author Sanjukta
+ * @version 5.0
+ */
 public class OOPSBannerApp {
 
     public static void main(String[] args) {
-        System.out.println("Welcome to OOPSBannerApp:)!");
 
+        String[] banner = {
+		    
+			String.join(" ","  ***** ", "   ***** ", " ******** ", "  ***** "),
+            String.join(" ","**     **", "**     **", "**     **", "**     **"),
+            String.join(" ","**     **", "**     **", "**     **", "**"),
+            String.join(" ","**     **", "**     **", "******** ", "   **** "),   
+			String.join(" ","**     **", "**     **", "**       ", "      **"),
+            String.join(" ","**     **", "**     **", "**       ", "**     **"),
+            String.join(" ","  ***** ", "   ***** ", " **      ", "   ***** ")
+        };
+
+        for (String line : banner) {
+            System.out.println(line);
+        }
     }
 }
